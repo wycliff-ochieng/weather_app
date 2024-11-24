@@ -12,7 +12,7 @@ def get_weather(location,conn):
 
     origin_time = dt.datetime.strptime(current['last_updated'], '%Y-%m-%d %H:%M')
 
-    current['last_updated'] = origin_time.strftime('%Y-%m-%dt%H:%M:%SZ')
+    current['last_updated'] = origin_time.strftime('%Y-%m-%d %H:%M:%S')
     print(current)
 
     write_weather(location,current,conn)
@@ -30,7 +30,7 @@ def write_weather(location,weather_js,conn):
     no_whitespaces_location = location.replace(" ","")
     print(no_whitespaces_location)
 
-    conn.query(f"INSERT INTO weather.{no_whitespaces_location} values ({weather_js['last_updated']},{weather_js['temp_c']},{weather_js['temp_f']},{weather_js['wind_mph']},{weather_js['wind_kph']})")
+    conn.query(f"INSERT INTO weather.{no_whitespaces_location} values ('{weather_js['last_updated']}',{weather_js['temp_c']},{weather_js['temp_f']},{weather_js['wind_mph']},{weather_js['wind_kph']})")
 
 def close_conn(conn):
     conn.close()
@@ -39,7 +39,7 @@ if __name__=="__main__":
 
     conn = open_conn()
 
-    get_weather("nairob",conn)
+    get_weather("nairobi",conn)
 
     get_weather("kisumu",conn)
 
