@@ -8,4 +8,4 @@ in weatherapi.We will be connecting to a time series database (TDEngine) using t
 
 specified library, fetch data from the api, trasform it and later store it the 
 
-database 
+database for future analysis and insights
